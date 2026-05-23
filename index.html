@@ -1,231 +1,702 @@
-import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>归鹤书 · 科技与光影的诗篇</title>
+    <link rel="canonical" href="https://www.guiheshu.com/">
+    <meta name="description" content="归鹤书 | 摄影师、全栈创作者。探索科技与艺术的联结，呈现视觉与心灵的共鸣。">
+    <meta name="keywords" content="归鹤书, 摄影, 科技, 艺术, 个人网站, Apple风格">
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-export default function PersonalIntroWebsite() {
-  const idols = [
-    {
-      name: '白鹿 · Bai Lu',
-      image:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop',
-      desc: '温柔与灵气并存的氛围感。',
-    },
-    {
-      name: '薛之谦 · Joker Xue',
-      image:
-        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop',
-      desc: '音乐、故事与情绪的表达者。',
-    },
-    {
-      name: '张凌赫 · Zhang Linghe',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop',
-      desc: '清冷感与未来感交织的气质。',
-    },
-  ]
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #000000;
+            background-image: radial-gradient(circle at 15% 30%, rgba(30, 30, 40, 0.9) 0%, #000000 90%);
+            color: #f5f5f7;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-  return (
-    <div className="bg-black text-white overflow-x-hidden font-sans scroll-smooth">
-      {/* 背景光效 */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-cyan-500/20 blur-[140px] rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-500/20 blur-[140px] rounded-full" />
-      </div>
+        /* 自定义滚动条 - 科技感细条 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a3a44;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6e6e80;
+        }
 
-      {/* 顶部导航 */}
-      <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/30 border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <h1 className="text-2xl font-bold tracking-[0.25em] text-white">
-            GUIHESHU
-          </h1>
+        /* 平滑渐变背景动效 */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at 70% 40%, rgba(88, 130, 255, 0.08), transparent 70%);
+        }
 
-          <nav className="hidden md:flex gap-8 text-sm text-slate-300">
-            <a href="#about" className="hover:text-cyan-300 transition">
-              ABOUT
-            </a>
+        /* 导航栏 - 毛玻璃效果 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(10, 10, 15, 0.65);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.7rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(120deg, #ffffff, #9aa9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .logo span {
+            font-weight: 400;
+            font-size: 0.9rem;
+            background: none;
+            -webkit-background-clip: unset;
+            color: #a0aec0;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #6e8eff;
+        }
 
-            <a href="#idol" className="hover:text-cyan-300 transition">
-              IDOLS
-            </a>
+        /* 主容器 */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        section {
+            scroll-margin-top: 90px;
+            margin-bottom: 6rem;
+        }
 
-            <a href="#contact" className="hover:text-cyan-300 transition">
-              CONTACT
-            </a>
-          </nav>
-        </div>
-      </header>
+        /* Hero 区域 - 苹果风格大标题 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(110, 142, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #a9c0ff;
+            border: 0.5px solid rgba(110, 142, 255, 0.4);
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFFFFF 0%, #C0D0FF 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .hero .hero-sub {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #bbb5d9;
+            margin-bottom: 1.5rem;
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #b9c3db;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-ghost:hover {
+            background: rgba(110, 142, 255, 0.2);
+            border-color: #6e8eff;
+            transform: scale(1.02);
+        }
 
-      {/* Hero */}
-      <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center"
-        >
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-cyan-400/30 bg-white/5 backdrop-blur-md text-cyan-300 text-sm tracking-widest">
-              APPLE STYLE · FUTURE DESIGN
-            </div>
+        /* 通用标题 */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ffffff, #bac8ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
-            <div>
-              <h2 className="text-6xl md:text-8xl font-black leading-none tracking-tight bg-gradient-to-r from-white to-slate-400 text-transparent bg-clip-text">
-                归鹤书
-              </h2>
+        /* 自我介绍卡片 - 玻璃风格 */
+        .bio-card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(16px);
+            border-radius: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2rem 2rem;
+            transition: all 0.4s;
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.4);
+        }
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #a0aec0;
+            cursor: pointer;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #6e8eff;
+            color: white;
+            box-shadow: 0 0 8px rgba(110,142,255,0.6);
+        }
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #eef2ff;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .bio-text p {
+            margin-bottom: 1rem;
+        }
+        .zh-content, .en-content {
+            transition: opacity 0.25s ease;
+        }
+        .hidden-lang {
+            display: none;
+        }
 
-              <p className="mt-6 text-xl md:text-2xl text-slate-300 leading-relaxed max-w-2xl">
-                Hello! I’m GuiHeShu.
-                <br />
-                理性与感性交汇的探索者。
-              </p>
-            </div>
+        /* 摄影作品展示 - 网格 + 视差悬停 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .photo-card {
+            background: rgba(15, 15, 22, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+        .photo-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(110, 142, 255, 0.4);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.6);
+        }
+        .photo-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .photo-card:hover .photo-img {
+            transform: scale(1.03);
+        }
+        .photo-info {
+            padding: 1.2rem 1.5rem;
+        }
+        .photo-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .photo-location {
+            font-size: 0.8rem;
+            color: #98a2c7;
+        }
 
-            <div className="flex flex-wrap gap-5">
-              <a
-                href="#about"
-                className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition duration-300 shadow-2xl"
-              >
-                Explore More
-              </a>
+        /* 吉祥话 / 幸运轮播区域 科技芯片风格 */
+        .auspicious-area {
+            background: radial-gradient(ellipse at 50% 50%, rgba(30, 30, 55, 0.5), rgba(0,0,0,0.2));
+            border-radius: 3rem;
+            padding: 2rem 1.5rem;
+            margin: 3rem 0;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(110, 142, 255, 0.2);
+        }
+        .motto-container {
+            text-align: center;
+        }
+        .motto-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 400;
+            color: #9aaaff;
+            margin-bottom: 1rem;
+        }
+        .motto-rotator {
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #f0f3ff, #b9cbff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            min-height: 4rem;
+            display: inline-block;
+            transition: opacity 0.5s;
+        }
+        .motto-chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        .chip {
+            background: rgba(110, 142, 255, 0.12);
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            border: 0.5px solid rgba(110, 142, 255, 0.3);
+            color: #cddbff;
+        }
 
-              <a
-                href="#idol"
-                className="px-8 py-4 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md hover:bg-white/10 transition"
-              >
-                Favorite Idols
-              </a>
-            </div>
-          </div>
+        /* 页脚 */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            text-align: center;
+            color: #7f8cae;
+            font-size: 0.85rem;
+            margin-top: 4rem;
+        }
+        .footer-domain {
+            font-family: monospace;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.03);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
 
-          {/* 头像 */}
-          <div className="relative flex justify-center">
-            <div className="absolute inset-0 bg-cyan-500/20 blur-[120px] rounded-full" />
+        /* 模态框 (摄影大图) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .modal-content {
+            max-width: 85vw;
+            max-height: 85vh;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
 
-            <div className="relative w-[340px] md:w-[420px] rounded-[40px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_80px_rgba(34,211,238,0.2)] hover:scale-[1.02] transition duration-500">
-              <img
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop"
-                alt="头像"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </motion.div>
+        /* 动画滚动出现 */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="text-white/60 w-8 h-8" />
-        </div>
-      </section>
+        @media (max-width: 780px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero .hero-sub {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 0 1.2rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .motto-rotator {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="glow-bg"></div>
 
-      {/* About */}
-      <section id="about" className="py-32 px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-20 text-center">
-            <p className="text-cyan-400 tracking-[0.3em] text-sm mb-4">
-              ABOUT ME
-            </p>
-
-            <h3 className="text-5xl md:text-7xl font-black tracking-tight">
-              自我介绍
-            </h3>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 rounded-[32px] p-10 backdrop-blur-xl shadow-2xl">
-            <p className="text-slate-300 leading-9 text-lg whitespace-pre-line">
-              Hello! 我是归鹤书。
-
-              我热爱科技、美学与艺术之间的融合，喜欢通过代码与设计创造具有未来感的视觉体验。
-
-              我认为真正高级的设计，不只是炫酷，而是能够在理性秩序与感性表达之间找到平衡。
-
-              在这里，你看到的不只是一个网站，更像是一场数字化艺术展览。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 偶像展示 */}
-      <section id="idol" className="py-32 px-6 bg-white/[0.03]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center">
-            <p className="text-cyan-400 tracking-[0.3em] text-sm mb-4">
-              FAVORITE IDOLS
-            </p>
-
-            <h3 className="text-5xl md:text-7xl font-black tracking-tight">
-              喜欢的达人
-            </h3>
-
-            <p className="text-slate-400 mt-6 text-lg">
-              白鹿 · 薛之谦 · 张凌赫
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {idols.map((item, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 backdrop-blur-xl hover:-translate-y-3 hover:shadow-[0_0_60px_rgba(34,211,238,0.18)] transition duration-700"
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-[520px] object-cover group-hover:scale-110 transition duration-[2000ms]"
-                  />
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-
-                <div className="absolute bottom-0 left-0 p-8 z-10">
-                  <h4 className="text-3xl font-bold mb-3">{item.name}</h4>
-
-                  <p className="text-slate-300 text-lg">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section id="contact" className="py-32 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-cyan-400 tracking-[0.3em] text-sm mb-4">
-            DOMAIN
-          </p>
-
-          <h3 className="text-5xl md:text-7xl font-black tracking-tight mb-10">
-            www.guiheshu.com
-          </h3>
-
-          <div className="bg-white/5 border border-white/10 rounded-[40px] p-10 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.4),transparent_60%)]" />
-
-            <p className="text-slate-300 text-xl leading-10 max-w-3xl mx-auto">
-              网站采用 Apple 风格未来感设计，
-              包含动态动画、玻璃拟态 UI、未来科技光效与沉浸式交互体验。
-            </p>
-
-            <div className="mt-10 flex flex-wrap justify-center gap-5">
-              <div className="px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-200">
-                Responsive Design
-              </div>
-
-              <div className="px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-200">
-                Apple Style Animation
-              </div>
-
-              <div className="px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-200">
-                Future UI Design
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-10 text-center text-slate-500 tracking-widest text-sm">
-        © 2026 GUIHESHU · ALL RIGHTS RESERVED
-      </footer>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo">归鹤书<span> · GUIHESHU</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#photography">摄影作品</a></li>
+            <li><a href="#blessings">灵韵集</a></li>
+        </ul>
     </div>
-  )
-}
+</nav>
+
+<main>
+    <!-- Hero 区域 -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-up visible">
+            <div class="hero-badge"><i class="fas fa-camera-retro"></i> 视觉叙事者 · 联结万象</div>
+            <h1>归鹤书</h1>
+            <div class="hero-sub">光与代码的织梦人</div>
+            <p class="hero-desc">理性思辨 · 感性共振 · 跨领域叙事</p>
+            <a href="#about" class="btn-ghost"><i class="fas fa-arrow-down"></i> 探索我的世界</a>
+        </div>
+    </section>
+
+    <!-- 自我介绍板块 中英文切换 -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-up">关于 · 归鹤书</h2>
+            <div class="bio-card fade-up">
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="btn-zh">中文</button>
+                    <button class="lang-btn" id="btn-en">English</button>
+                </div>
+                <!-- 中文内容 -->
+                <div id="zh-bio" class="bio-text zh-content">
+                    <p>Hello! 我是归鹤书。很荣幸能在此，以文字为媒介，勾勒一个立体而真实的自我。若用一个词概括我的核心特质，那或许是 “联结”。我深信，世界的魅力在于其复杂而精妙的关联。因此，我热衷于探寻不同学科、不同领域间的隐秘纽带。在物理实验中验证的数学之美，在历史脉络里窥见的人文哲思，在代码逻辑中感受的秩序与创造——这些跨越藩篱的体验，构成了我认知世界的独特棱镜。它让我不满足于单一答案，而习惯于用多元视角审视问题。</p>
+                    <p>理性与感性的平衡，是我追求的另一重境界。在逻辑推导与数据模型中，我享受思辨的严谨与清晰；在文学阅读与艺术赏析里，我亦珍视情感的共鸣与想象的驰骋。我认为，真正的“高级”并非摒弃感性，而是让理性为感性导航，让感性为理性赋魅。这使我既能冷静分析一道数学压轴题，也能为一部电影中的光影与配乐深深动容。在每一次快门声中，在每一行代码迭代里，我寻找理性框架与感性灵感的黄金交点。</p>
+                    <p>摄影于我，是捕捉瞬间的永恒；科技于我，是构建联结的桥梁。欢迎来到我的世界，期待与你产生奇妙的共鸣。</p>
+                </div>
+                <!-- 英文内容 (专业翻译) -->
+                <div id="en-bio" class="bio-text en-content hidden-lang">
+                    <p>Hello! I am Gui Heshu. It’s a pleasure to outline a multi-dimensional and authentic self through words. If one word could capture my core essence, it would be “Connection”. I strongly believe the beauty of our world lies within its intricate and subtle relationships. Hence, I am passionate about exploring hidden bonds across different disciplines — the mathematical elegance validated in physics experiments, the philosophical insights glimpsed through historical threads, the sense of order and creativity within code logic. These boundary-crossing experiences form a unique prism through which I perceive reality, driving me to embrace multiple perspectives rather than a single answer.</p>
+                    <p>The harmony between rationality and emotion is another realm I pursue. Within logical deduction and data models, I enjoy rigorous, clear thinking; within literature and art appreciation, I treasure emotional resonance and imaginative freedom. I believe true "sophistication" never abandons emotion but allows rationality to navigate while sensibility enchants. This enables me to calmly analyze a challenging math problem and be deeply moved by the cinematography and score of a film. Through every shutter click and each line of code iteration, I search for the golden intersection of logic and inspiration.</p>
+                    <p>Photography, for me, captures eternal moments; technology builds bridges of connection. Welcome to my world, and I look forward to resonating with you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 摄影作品展示板块 -->
+    <section id="photography">
+        <div class="container">
+            <h2 class="section-title fade-up">光影诗集 · 摄影作品</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- 作品卡片1 - 用户可自行替换图片链接 -->
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="晨雾山林" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">暮色之镜</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 川西 · 冷嘎措</div>
+                    </div>
+                </div>
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="城市涟漪" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">城市脉搏</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 上海 · 陆家嘴</div>
+                    </div>
+                </div>
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="静谧海岸" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">永恒之蓝</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 威海 · 金石湾</div>
+                    </div>
+                </div>
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/2894443/pexels-photo-2894443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/2894443/pexels-photo-2894443.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="云端之上" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">云栖星野</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 四姑娘山 · 八角棚</div>
+                    </div>
+                </div>
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/2242909/pexels-photo-2242909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/2242909/pexels-photo-2242909.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="古建光影" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">时空回廊</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 故宫 · 金水桥</div>
+                    </div>
+                </div>
+                <div class="photo-card fade-up" data-img="https://images.pexels.com/photos/3020905/pexels-photo-3020905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+                    <img class="photo-img" src="https://images.pexels.com/photos/3020905/pexels-photo-3020905.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop" alt="静谧溪流" loading="lazy">
+                    <div class="photo-info">
+                        <div class="photo-title">森之诗</div>
+                        <div class="photo-location"><i class="fas fa-location-dot"></i> 新疆 · 喀纳斯</div>
+                    </div>
+                </div>
+            </div>
+            <p class="bio-text" style="text-align: center; margin-top: 2rem; font-size:0.85rem;"><i class="fas fa-expand-alt"></i> 点击任意摄影作品即可沉浸欣赏大图</p>
+        </div>
+    </section>
+
+    <!-- 吉利话 / 幸运箴言区域 科技祝福 -->
+    <section id="blessings">
+        <div class="container">
+            <div class="auspicious-area fade-up">
+                <div class="motto-container">
+                    <div class="motto-title"><i class="fas fa-feather-alt"></i> 灵韵流转 · 能量箴言</div>
+                    <div class="motto-rotator" id="rotatingMotto">✨ 诸事顺利 ✨</div>
+                    <div class="motto-chip-group">
+                        <span class="chip">诸事顺利</span><span class="chip">金钱利好运</span><span class="chip">语事顺利</span>
+                        <span class="chip">受财爱己</span><span class="chip">顺百顺</span><span class="chip">没有烦恼</span>
+                        <span class="chip">万事顺遂</span><span class="chip">平安吉祥</span><span class="chip">时来运转</span>
+                        <span class="chip">锦景一片大好</span><span class="chip">所行皆明</span><span class="chip">想皆顺</span>
+                        <span class="chip">凡事发生</span><span class="chip">顺风顺水</span><span class="chip">发财被爱</span>
+                        <span class="chip">人间一趟</span><span class="chip">平安顺送</span><span class="chip">正好大景</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 归鹤书 · 联结科技与诗意 | 版权所有</p>
+    <p class="footer-domain"><i class="fas fa-globe"></i> 栖息地：www.guiheshu.com</p>
+    <p style="margin-top: 8px;"><i class="fas fa-camera"></i> 光为笔 · 心为镜</p>
+</footer>
+
+<!-- 摄影模态框 -->
+<div id="imageModal" class="modal">
+    <div class="modal-close">&times;</div>
+    <div class="modal-content">
+        <img id="modalImg" src="" alt="摄影作品大图">
+    </div>
+</div>
+
+<script>
+    // 语言切换逻辑
+    const zhDiv = document.getElementById('zh-bio');
+    const enDiv = document.getElementById('en-bio');
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+
+    function setLang(lang) {
+        if (lang === 'zh') {
+            zhDiv.classList.remove('hidden-lang');
+            enDiv.classList.add('hidden-lang');
+            btnZh.classList.add('active');
+            btnEn.classList.remove('active');
+        } else {
+            zhDiv.classList.add('hidden-lang');
+            enDiv.classList.remove('hidden-lang');
+            btnEn.classList.add('active');
+            btnZh.classList.remove('active');
+        }
+    }
+    btnZh.addEventListener('click', () => setLang('zh'));
+    btnEn.addEventListener('click', () => setLang('en'));
+
+    // 吉利话轮播 (科技感动态刷新)
+    const mottoList = [
+        "✨ 诸事顺利 ✨", "💰 金钱利好运 💰", "🍃 语事顺利 🍃", "💖 受财爱己 💖", 
+        "🌀 顺百顺 · 万事顺遂 🌀", "🌟 没有烦恼 🌟", "🌈 万事顺 · 正好大景 🌈", 
+        "🕊️ 平安吉祥 🕊️", "⏳ 时来运转 ⏳", "🌅 锦景一片大好 🌅", 
+        "🌠 所行皆明 · 想皆顺 🌠", "🍀 凡事发生皆有利 🍀", "🌊 顺风顺水 🌊", 
+        "💎 发财被爱 💎", "🏞️ 人间一趟 · 平安顺送 🏞️"
+    ];
+    let mottoIndex = 0;
+    const mottoElement = document.getElementById('rotatingMotto');
+    function rotateMotto() {
+        mottoIndex = (mottoIndex + 1) % mottoList.length;
+        if (mottoElement) {
+            mottoElement.style.opacity = '0';
+            setTimeout(() => {
+                mottoElement.innerText = mottoList[mottoIndex];
+                mottoElement.style.opacity = '1';
+            }, 200);
+        }
+    }
+    setInterval(rotateMotto, 2800);
+
+    // 滚动动画 (Intersection Observer)
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    fadeElements.forEach(el => observer.observe(el));
+    // Hero 已经是可见状态手动确保
+    document.querySelector('.hero .hero-content')?.classList.add('visible');
+
+    // 摄影模态框: 点击卡片展示大图
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    const closeModal = document.querySelector('.modal-close');
+    const photoCards = document.querySelectorAll('.photo-card');
+
+    function openModal(imgSrc) {
+        modal.style.display = 'flex';
+        modalImg.src = imgSrc;
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModalFunc() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    photoCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // 获取自定义属性 data-img 或 img 真实大图链接
+            let largeImg = card.getAttribute('data-img');
+            if (!largeImg) {
+                const imgElement = card.querySelector('.photo-img');
+                if (imgElement) largeImg = imgElement.src;
+                else largeImg = "";
+            }
+            // 优化显示：将原本压缩图换为高质量大图(如果url包含宽度参数就替换)
+            if (largeImg) {
+                // 简单替换更高质量 (pexels 示例，去除参数改为高分辨率)
+                let highRes = largeImg.replace(/w=\d+&h=\d+/, 'w=1600&h=1200');
+                if (highRes === largeImg && largeImg.includes('pexels')) {
+                    highRes = largeImg.split('?')[0] + '?auto=compress&cs=tinysrgb&w=1600&h=1200&dpr=2';
+                }
+                openModal(highRes);
+            } else {
+                openModal("https://placehold.co/1600x900/1a1a2e/white?text=归鹤书·摄影");
+            }
+        });
+    });
+    closeModal.addEventListener('click', closeModalFunc);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModalFunc();
+    });
+    // 键盘esc关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModalFunc();
+    });
+
+    // 平滑导航
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = this.getAttribute('href');
+            if (target && target !== '#') {
+                const targetEl = document.querySelector(target);
+                if (targetEl) {
+                    e.preventDefault();
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+    // 绑定域名展示: 已经显示在footer
+    console.log("Site ready for domain: www.guiheshu.com");
+</script>
+</body>
+</html>

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
 <title>归鹤书 · 科技与光影的诗篇</title>
-
 <link rel="canonical" href="https://www.guiheshu.com/">
-
 <meta name="description" content="归鹤书 | 摄影师、全栈创作者。探索科技与艺术的联结，呈现视觉与心灵的共鸣。">
 <meta name="keywords" content="归鹤书, 摄影, 科技, 艺术, Apple风格个人网站">
 
@@ -19,390 +17,390 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.mi
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-    font-family:'Inter',sans-serif;
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-    line-height:1.7;
+font-family:'Inter',sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
+line-height:1.7;
 }
 
 /* 背景光效 */
 
 body::before{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    z-index:-2;
-    background:
-    radial-gradient(circle at 20% 30%,rgba(88,130,255,.18),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(0,255,200,.08),transparent 30%),
-    #000;
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-2;
+background:
+radial-gradient(circle at 20% 30%,rgba(88,130,255,.18),transparent 30%),
+radial-gradient(circle at 80% 70%,rgba(0,255,200,.08),transparent 30%),
+#000;
 }
 
 /* 星空背景 */
 
 body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-    radial-gradient(2px 2px at 20px 30px,#fff,transparent),
-    radial-gradient(2px 2px at 40px 70px,#aaa,transparent),
-    radial-gradient(1px 1px at 130px 40px,#fff,transparent),
-    radial-gradient(1px 1px at 230px 190px,#ddd,transparent);
-    background-size:250px 250px;
-    opacity:.15;
-    z-index:-1;
+content:"";
+position:fixed;
+inset:0;
+background-image:
+radial-gradient(2px 2px at 20px 30px,#fff,transparent),
+radial-gradient(2px 2px at 40px 70px,#aaa,transparent),
+radial-gradient(1px 1px at 130px 40px,#fff,transparent),
+radial-gradient(1px 1px at 230px 190px,#ddd,transparent);
+background-size:250px 250px;
+opacity:.15;
+z-index:-1;
 }
 
 /* 导航栏 */
 
 .navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:18px 40px;
-    z-index:999;
-    backdrop-filter:blur(20px);
-    background:rgba(0,0,0,.45);
-    border-bottom:1px solid rgba(255,255,255,.08);
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:18px 40px;
+z-index:999;
+backdrop-filter:blur(20px);
+background:rgba(0,0,0,.45);
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .nav-container{
-    max-width:1400px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+max-width:1400px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .logo{
-    font-size:1.6rem;
-    font-weight:700;
-    text-decoration:none;
-    color:#fff;
-    letter-spacing:-1px;
+font-size:1.6rem;
+font-weight:700;
+text-decoration:none;
+color:#fff;
+letter-spacing:-1px;
 }
 
 .logo span{
-    color:#8aa4ff;
-    font-size:.9rem;
-    margin-left:4px;
+color:#8aa4ff;
+font-size:.9rem;
+margin-left:4px;
 }
 
 .nav-links{
-    display:flex;
-    gap:32px;
-    list-style:none;
+display:flex;
+gap:32px;
+list-style:none;
 }
 
 .nav-links a{
-    color:#ddd;
-    text-decoration:none;
-    transition:.3s;
+color:#ddd;
+text-decoration:none;
+transition:.3s;
 }
 
 .nav-links a:hover{
-    color:#8aa4ff;
+color:#8aa4ff;
 }
 
 /* hero */
 
 .hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+overflow:hidden;
 }
 
 .hero-content{
-    max-width:900px;
-    padding:20px;
+max-width:900px;
+padding:20px;
 }
 
 .hero-badge{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.1);
-    color:#a8bbff;
-    margin-bottom:24px;
-    backdrop-filter:blur(10px);
+display:inline-block;
+padding:8px 18px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.1);
+color:#a8bbff;
+margin-bottom:24px;
+backdrop-filter:blur(10px);
 }
 
 .hero h1{
-    font-size:6rem;
-    font-weight:800;
-    letter-spacing:-4px;
-    background:linear-gradient(135deg,#fff,#9ab0ff);
-    -webkit-background-clip:text;
-    color:transparent;
+font-size:6rem;
+font-weight:800;
+letter-spacing:-4px;
+background:linear-gradient(135deg,#fff,#9ab0ff);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 .hero-sub{
-    margin-top:10px;
-    font-size:1.5rem;
-    color:#bfc8ff;
+margin-top:10px;
+font-size:1.5rem;
+color:#bfc8ff;
 }
 
 .hero-desc{
-    margin-top:20px;
-    color:#a7b1d3;
-    font-size:1.05rem;
+margin-top:20px;
+color:#a7b1d3;
+font-size:1.05rem;
 }
 
 .btn-ghost{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    margin-top:35px;
-    padding:14px 28px;
-    border-radius:999px;
-    text-decoration:none;
-    color:white;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    transition:.35s;
+display:inline-flex;
+align-items:center;
+gap:10px;
+margin-top:35px;
+padding:14px 28px;
+border-radius:999px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
+transition:.35s;
 }
 
 .btn-ghost:hover{
-    transform:translateY(-3px);
-    background:rgba(88,130,255,.18);
+transform:translateY(-3px);
+background:rgba(88,130,255,.18);
 }
 
 /* section */
 
 section{
-    padding:100px 20px;
+padding:100px 20px;
 }
 
 .container{
-    max-width:1300px;
-    margin:auto;
+max-width:1300px;
+margin:auto;
 }
 
 .section-title{
-    text-align:center;
-    font-size:3rem;
-    margin-bottom:60px;
-    font-weight:700;
-    letter-spacing:-2px;
-    background:linear-gradient(135deg,#fff,#9cb4ff);
-    -webkit-background-clip:text;
-    color:transparent;
+text-align:center;
+font-size:3rem;
+margin-bottom:60px;
+font-weight:700;
+letter-spacing:-2px;
+background:linear-gradient(135deg,#fff,#9cb4ff);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 /* 关于 */
 
 .bio-card{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:40px;
-    padding:50px;
-    backdrop-filter:blur(20px);
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:40px;
+padding:50px;
+backdrop-filter:blur(20px);
 }
 
 .lang-switch{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-bottom:30px;
+display:flex;
+justify-content:flex-end;
+gap:10px;
+margin-bottom:30px;
 }
 
 .lang-btn{
-    border:none;
-    background:rgba(255,255,255,.06);
-    color:#ccc;
-    padding:10px 18px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:.3s;
+border:none;
+background:rgba(255,255,255,.06);
+color:#ccc;
+padding:10px 18px;
+border-radius:999px;
+cursor:pointer;
+transition:.3s;
 }
 
 .lang-btn.active{
-    background:#6e8eff;
-    color:white;
+background:#6e8eff;
+color:white;
 }
 
 .bio-text{
-    color:#d6dcff;
-    font-size:1.08rem;
+color:#d6dcff;
+font-size:1.08rem;
 }
 
 .bio-text p{
-    margin-bottom:22px;
+margin-bottom:22px;
 }
 
 .hidden-lang{
-    display:none;
+display:none;
 }
 
 /* 摄影 */
 
 .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:28px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:28px;
 }
 
 .photo-card{
-    overflow:hidden;
-    border-radius:30px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    transition:.45s;
-    cursor:pointer;
-    backdrop-filter:blur(12px);
+overflow:hidden;
+border-radius:30px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+transition:.45s;
+cursor:pointer;
+backdrop-filter:blur(12px);
 }
 
 .photo-card:hover{
-    transform:translateY(-12px) scale(1.02);
-    box-shadow:0 30px 50px rgba(0,0,0,.5);
-    border-color:rgba(120,140,255,.4);
+transform:translateY(-12px) scale(1.02);
+box-shadow:0 30px 50px rgba(0,0,0,.5);
+border-color:rgba(120,140,255,.4);
 }
 
 .photo-img{
-    width:100%;
-    height:260px;
-    object-fit:cover;
-    transition:1s;
+width:100%;
+height:260px;
+object-fit:cover;
+transition:1s;
 }
 
 .photo-card:hover .photo-img{
-    transform:scale(1.06);
+transform:scale(1.06);
 }
 
 .photo-info{
-    padding:22px;
+padding:22px;
 }
 
 .photo-title{
-    font-size:1.2rem;
-    font-weight:600;
+font-size:1.2rem;
+font-weight:600;
 }
 
 .photo-location{
-    margin-top:8px;
-    color:#9fa8cb;
-    font-size:.9rem;
+margin-top:8px;
+color:#9fa8cb;
+font-size:.9rem;
 }
 
 /* 箴言 */
 
 .auspicious-area{
-    padding:60px 30px;
-    border-radius:40px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(20px);
-    text-align:center;
+padding:60px 30px;
+border-radius:40px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+text-align:center;
 }
 
 .motto-title{
-    color:#94a9ff;
-    letter-spacing:4px;
-    margin-bottom:30px;
+color:#94a9ff;
+letter-spacing:4px;
+margin-bottom:30px;
 }
 
 .motto-rotator{
-    font-size:2rem;
-    font-weight:700;
-    min-height:80px;
-    background:linear-gradient(135deg,#fff,#b6c6ff);
-    -webkit-background-clip:text;
-    color:transparent;
+font-size:2rem;
+font-weight:700;
+min-height:80px;
+background:linear-gradient(135deg,#fff,#b6c6ff);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 .motto-chip-group{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:12px;
-    margin-top:30px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+margin-top:30px;
 }
 
 .chip{
-    padding:10px 18px;
-    border-radius:999px;
-    background:rgba(110,142,255,.12);
-    border:1px solid rgba(110,142,255,.2);
-    color:#cfd8ff;
-    font-size:.85rem;
+padding:10px 18px;
+border-radius:999px;
+background:rgba(110,142,255,.12);
+border:1px solid rgba(110,142,255,.2);
+color:#cfd8ff;
+font-size:.85rem;
 }
 
 /* footer */
 
 footer{
-    text-align:center;
-    padding:50px 20px;
-    border-top:1px solid rgba(255,255,255,.06);
-    color:#8892ba;
+text-align:center;
+padding:50px 20px;
+border-top:1px solid rgba(255,255,255,.06);
+color:#8892ba;
 }
 
 .footer-domain{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:999px;
-    background:rgba(255,255,255,.04);
+margin-top:12px;
+display:inline-block;
+padding:8px 18px;
+border-radius:999px;
+background:rgba(255,255,255,.04);
 }
 
 /* modal */
 
 .modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.94);
-    z-index:2000;
-    justify-content:center;
-    align-items:center;
-    backdrop-filter:blur(20px);
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.94);
+z-index:2000;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(20px);
 }
 
 .modal-content img{
-    max-width:85vw;
-    max-height:85vh;
-    border-radius:24px;
+max-width:85vw;
+max-height:85vh;
+border-radius:24px;
 }
 
 .modal-close{
-    position:absolute;
-    top:30px;
-    right:40px;
-    font-size:2rem;
-    cursor:pointer;
+position:absolute;
+top:30px;
+right:40px;
+font-size:2rem;
+cursor:pointer;
 }
 
 /* 动画 */
 
 .fade-up{
-    opacity:0;
-    transform:translateY(40px);
-    transition:1s;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
 }
 
 .fade-up.visible{
-    opacity:1;
-    transform:translateY(0);
+opacity:1;
+transform:translateY(0);
 }
 
 /* 响应式 */
@@ -410,23 +408,23 @@ footer{
 @media(max-width:768px){
 
 .hero h1{
-    font-size:3.2rem;
+font-size:3.2rem;
 }
 
 .hero-sub{
-    font-size:1.1rem;
+font-size:1.1rem;
 }
 
 .section-title{
-    font-size:2rem;
+font-size:2rem;
 }
 
 .nav-links{
-    gap:16px;
+gap:16px;
 }
 
 .bio-card{
-    padding:30px;
+padding:30px;
 }
 
 }
@@ -437,6 +435,7 @@ footer{
 <body>
 
 <nav class="navbar">
+
 <div class="nav-container">
 
 <a href="#" class="logo">
@@ -451,6 +450,7 @@ footer{
 </ul>
 
 </div>
+
 </nav>
 
 <!-- HERO -->
@@ -503,42 +503,41 @@ footer{
 <div id="zh-bio" class="bio-text">
 
 <p>
-Hello! 我是归鹤书。很荣幸能在此，以文字为媒介，勾勒一个立体而真实的自我。
+Hello! 我是归鹤书。很荣幸能在此，以文字为媒介，勾勒一个立体而真实的自我。若用一个词概括我的核心特质，那或许是“联结”。我深信，世界的魅力在于其复杂而精妙的关联。因此，我热衷于探寻不同学科、不同领域间的隐秘纽带。
 </p>
 
 <p>
-若用一个词概括我的核心特质，那或许是“联结”。
-我深信，世界的魅力在于其复杂而精妙的关联。因此，我热衷于探寻不同学科、不同领域间的隐秘纽带。
+在物理实验中验证的数学之美，在历史脉络里窥见的人文哲思，在代码逻辑中感受的秩序与创造——这些跨越藩篱的体验，构成了我认知世界的独特棱镜。它让我不满足于单一答案，而习惯于用多元视角审视问题。
 </p>
 
 <p>
-在物理实验中验证的数学之美，在历史脉络里窥见的人文哲思，在代码逻辑中感受的秩序与创造——这些跨越藩篱的体验，构成了我认知世界的独特棱镜。
-它让我不满足于单一答案，而习惯于用多元视角审视问题。
+理性与感性的平衡，是我追求的另一重境界。在逻辑推导与数据模型中，我享受思辨的严谨与清晰；在文学阅读与艺术赏析里，我亦珍视情感的共鸣与想象的驰骋。我认为，真正的“高级”并非摒弃感性，而是让理性为感性导航，让感性为理性赋魅。
 </p>
 
 <p>
-理性与感性的平衡，是我追求的另一重境界。
-在逻辑推导与数据模型中，我享受思辨的严谨与清晰；在文学阅读与艺术赏析里，我亦珍视情感的共鸣与想象的驰骋。
-</p>
-
-<p>
-我认为，真正的“高级”并非摒弃感性，而是让理性为感性导航，让感性为理性赋魅。
 这使我既能冷静分析一道数学压轴题，也能为一部电影中的光影与配乐深深动容。
 </p>
 
 </div>
 
 <div id="en-bio" class="bio-text hidden-lang">
+
 <p>
-Hello! I am Gui Heshu.
-A creator passionate about technology,
-art and visual storytelling.
+Hello! I am Gui Heshu. It is a pleasure to introduce a genuine and multidimensional version of myself through words. If I were to summarize my core trait in one word, it would perhaps be “connection.” I firmly believe that the beauty of the world lies in its intricate and profound interrelations. Therefore, I am passionate about exploring the hidden links between different disciplines and fields.
 </p>
 
 <p>
-Photography captures eternity.
-Technology builds connection.
+The mathematical elegance verified through physics experiments, the humanistic reflections discovered within the flow of history, and the sense of order and creativity perceived in coding logic — these experiences that transcend boundaries together form the unique prism through which I understand the world. They prevent me from settling for a single answer and encourage me to examine problems from multiple perspectives.
 </p>
+
+<p>
+The balance between rationality and sensibility is another realm I constantly pursue. In logical deduction and data models, I appreciate the rigor and clarity of critical thinking; in literature and artistic appreciation, I equally treasure emotional resonance and the freedom of imagination. I believe true sophistication is not about abandoning emotion, but allowing rationality to guide emotion, while emotion enriches rationality.
+</p>
+
+<p>
+Because of this, I can calmly analyze a challenging mathematical problem while also being deeply moved by the cinematography and soundtrack of a film.
+</p>
+
 </div>
 
 </div>
@@ -618,6 +617,8 @@ style="text-align:center;margin-top:2rem;font-size:.85rem;">
 点击任意摄影作品即可沉浸欣赏大图
 </p>
 
+<!-- 新增说明 -->
+
 <p style="
 text-align:center;
 margin-top:1rem;
@@ -654,14 +655,12 @@ letter-spacing:.03em;
 </div>
 
 <div class="motto-chip-group">
-
 <span class="chip">诸事顺利</span>
 <span class="chip">万事顺遂</span>
 <span class="chip">平安吉祥</span>
 <span class="chip">时来运转</span>
 <span class="chip">顺风顺水</span>
 <span class="chip">发财被爱</span>
-
 </div>
 
 </div>
@@ -794,4 +793,5 @@ modal.style.display='none';
 </script>
 
 </body>
+
 </html>

@@ -303,6 +303,81 @@ color:#9fa8cb;
 font-size:.9rem;
 }
 
+/* 音乐板块 */
+
+.music-card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:40px;
+padding:50px 30px;
+backdrop-filter:blur(20px);
+}
+
+.music-title{
+text-align:center;
+font-size:2rem;
+margin-bottom:40px;
+background:linear-gradient(135deg,#fff,#ffb3c7);
+-webkit-background-clip:text;
+color:transparent;
+font-weight:700;
+}
+
+#playlist-container{
+width:100%;
+max-width:800px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.song-item{
+background:rgba(255,255,255,.05);
+border-radius:16px;
+padding:14px 18px;
+display:flex;
+align-items:center;
+opacity:0;
+transform:translateY(30px);
+transition:all .6s cubic-bezier(.25,1,.5,1);
+border-left:4px solid transparent;
+backdrop-filter:blur(10px);
+}
+
+.song-item.show{
+opacity:1;
+transform:translateY(0);
+border-left:4px solid #ff4d6d;
+background:rgba(255,255,255,.08);
+}
+
+.song-index{
+font-size:16px;
+font-weight:bold;
+color:#888;
+width:45px;
+flex-shrink:0;
+}
+
+.song-info{
+flex-grow:1;
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.song-title{
+font-size:16px;
+font-weight:500;
+color:#fff;
+}
+
+.song-artist{
+font-size:13px;
+color:#aaa;
+}
+
 /* 箴言 */
 
 .auspicious-area{
@@ -427,6 +502,10 @@ gap:16px;
 padding:30px;
 }
 
+.music-card{
+padding:30px 20px;
+}
+
 }
 
 </style>
@@ -446,6 +525,7 @@ padding:30px;
 <li><a href="#home">首页</a></li>
 <li><a href="#about">关于</a></li>
 <li><a href="#photography">摄影</a></li>
+<li><a href="#music">音乐</a></li>
 <li><a href="#blessings">灵韵</a></li>
 </ul>
 
@@ -617,8 +697,6 @@ style="text-align:center;margin-top:2rem;font-size:.85rem;">
 点击任意摄影作品即可沉浸欣赏大图
 </p>
 
-<!-- 新增说明 -->
-
 <p style="
 text-align:center;
 margin-top:1rem;
@@ -632,6 +710,31 @@ letter-spacing:.03em;
 所以照片取材于网络，
 图片信息与地理信息有出入。
 </p>
+
+</div>
+
+</section>
+
+<!-- 音乐 -->
+
+<section id="music">
+
+<div class="container">
+
+<h2 class="section-title fade-up">
+我喜欢的音乐 · 灵魂频率
+</h2>
+
+<div class="music-card fade-up">
+
+<div class="music-title">
+<i class="fas fa-music"></i>
+我的播放列表
+</div>
+
+<div id="playlist-container"></div>
+
+</div>
 
 </div>
 
@@ -672,7 +775,7 @@ letter-spacing:.03em;
 <footer>
 
 <p>
-© 2026 归鹤书 · 联结科技与诗意 | 版权所有
+© 2025 归鹤书 · 联结科技与诗意 | 版权所有
 </p>
 
 <p class="footer-domain">
@@ -790,8 +893,113 @@ modal.onclick=()=>{
 modal.style.display='none';
 }
 
+/* 音乐歌单 */
+
+const playlistData = [
+{ index: 1, title: "猜猜灯", artist: "程响" },
+{ index: 2, title: "遥远", artist: "邓紫棋" },
+{ index: 3, title: "动物世界", artist: "薛之谦" },
+{ index: 4, title: "野心", artist: "薛之谦" },
+{ index: 5, title: "哑巴", artist: "薛之谦" },
+{ index: 6, title: "心中事", artist: "傅晓" },
+{ index: 7, title: "怪咖", artist: "薛之谦" },
+{ index: 8, title: "天外来物", artist: "薛之谦" },
+{ index: 9, title: "演员", artist: "薛之谦" },
+{ index: 10, title: "其实", artist: "薛之谦" },
+{ index: 11, title: "暧昧", artist: "薛之谦" },
+{ index: 12, title: "下雨了", artist: "薛之谦" },
+{ index: 13, title: "意外", artist: "薛之谦" },
+{ index: 14, title: "丑八怪", artist: "薛之谦" },
+{ index: 15, title: "高尚", artist: "薛之谦" },
+{ index: 16, title: "thank u, next (Explicit)", artist: "Ariana Grande" },
+{ index: 17, title: "Beauty And A Beat", artist: "Justin Bieber" },
+{ index: 18, title: "Promise", artist: "EXO" },
+{ index: 19, title: "遗憾", artist: "薛之谦" },
+{ index: 20, title: "小半", artist: "陈粒" },
+{ index: 21, title: "Clouds", artist: "Before You Exit" },
+{ index: 22, title: "Lucky (feat. Colbie Caillat)", artist: "Jason Mraz" },
+{ index: 23, title: "没那么简单", artist: "黄小琥" },
+{ index: 24, title: "孤独患者", artist: "陈奕迅" },
+{ index: 25, title: "路过人间", artist: "郁可唯" },
+{ index: 26, title: "Everywhere We Go", artist: "陈冠希 / MC仁" },
+{ index: 27, title: "乐园 (新加坡 lucky 跨年...)", artist: "陈冠希" },
+{ index: 28, title: "曾有你的春夏秋冬", artist: "薛之谦" },
+{ index: 29, title: "摩天大楼", artist: "薛之谦" },
+{ index: 30, title: "最好不过", artist: "薛之谦" },
+{ index: 31, title: "银河 (Running to the...)", artist: "ONE ONE" },
+{ index: 32, title: "绿色", artist: "陈雪凝" },
+{ index: 33, title: "战场", artist: "红花会" },
+{ index: 34, title: "消愁", artist: "毛不易" },
+{ index: 35, title: "越描越黑", artist: "薛之谦" },
+{ index: 36, title: "汗水和泪水", artist: "薛之谦" },
+{ index: 37, title: "没有人的那条街 (Live)", artist: "薛之谦" },
+{ index: 38, title: "初学者", artist: "薛之谦" },
+{ index: 39, title: "深夜", artist: "毛不易" },
+{ index: 40, title: "某某某", artist: "薛之谦" },
+{ index: 41, title: "一点点", artist: "周杰伦" },
+{ index: 42, title: "说不出的快活", artist: "葛兰" },
+{ index: 43, title: "失落沙洲", artist: "徐佳莹" },
+{ index: 44, title: "洗发水", artist: "薛之谦" },
+{ index: 45, title: "你是最美的风景", artist: "高莹" },
+{ index: 46, title: "Try Everything", artist: "Shakira" },
+{ index: 47, title: "我好像在哪见过你 (Live)", artist: "薛之谦" },
+{ index: 48, title: "风筝", artist: "薛之谦" },
+{ index: 49, title: "7 Years", artist: "Lukas Graham" },
+{ index: 50, title: "修仙路口", artist: "薛之谦" },
+{ index: 51, title: "最好的我 (50 Feet)", artist: "房东的猫" },
+{ index: 52, title: "心愿", artist: "四个女生" },
+{ index: 53, title: "难看红", artist: "Zesba" },
+{ index: 54, title: "心如止水", artist: "Ice Paper" },
+{ index: 55, title: "曾经的你", artist: "许巍" },
+{ index: 56, title: "红豆隔万里", artist: "徐秉龙" },
+{ index: 57, title: "如果我丢了 (Live)", artist: "薛之谦" },
+{ index: 58, title: "江南", artist: "林俊杰" },
+{ index: 59, title: "渡红尘", artist: "张碧晨" },
+{ index: 60, title: "一点点 (为什么...)", artist: "周杰伦" },
+{ index: 61, title: "Star Crossing Night", artist: "王源" },
+{ index: 62, title: "不染", artist: "毛不易" },
+{ index: 63, title: "慢慢喜欢你", artist: "莫文蔚" },
+{ index: 64, title: "爱情转移", artist: "陈奕迅" }
+];
+
+const container=document.getElementById('playlist-container');
+
+playlistData.forEach(song=>{
+
+const item=document.createElement('div');
+
+item.className='song-item';
+
+item.innerHTML=`
+<div class="song-index">${song.index}</div>
+<div class="song-info">
+<div class="song-title">${song.title}</div>
+<div class="song-artist">${song.artist}</div>
+</div>
+`;
+
+container.appendChild(item);
+
+});
+
+const items=document.querySelectorAll('.song-item');
+
+items.forEach((item,index)=>{
+
+setTimeout(()=>{
+
+item.classList.add('show');
+
+item.scrollIntoView({
+behavior:'smooth',
+block:'nearest'
+});
+
+},index*200);
+
+});
+
 </script>
 
 </body>
-
 </html>

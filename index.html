@@ -1,601 +1,781 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>归鹤书 · 科技与光影的诗篇</title>
-    <link rel="canonical" href="https://www.guiheshu.com/">
-    <meta name="description" content="归鹤书 | 摄影师、全栈创作者。探索科技与艺术的联结，呈现视觉与心灵的共鸣。">
-    <meta name="keywords" content="归鹤书, 摄影, 科技, 艺术, 个人网站, Apple风格">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>归鹤书 · 科技与光影的诗篇</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link rel="canonical" href="https://www.guiheshu.com/">
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: #000000;
-            background-image: radial-gradient(circle at 15% 30%, rgba(30, 30, 40, 0.9) 0%, #000000 90%);
-            color: #f5f5f7;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
+<meta name="description" content="归鹤书 | 摄影师、全栈创作者。探索科技与艺术的联结，呈现视觉与心灵的共鸣。">
+<meta name="keywords" content="归鹤书, 摄影, 科技, 艺术, Apple风格个人网站">
 
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        ::-webkit-scrollbar-track {
-            background: #111;
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-        ::-webkit-scrollbar-thumb {
-            background: #3a3a44;
-            border-radius: 8px;
-        }
+<style>
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6e6e80;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .glow-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(ellipse at 70% 40%, rgba(88, 130, 255, 0.08), transparent 70%);
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            backdrop-filter: blur(20px) saturate(180%);
-            background: rgba(10, 10, 15, 0.65);
-            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
+body{
+    font-family:'Inter',sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+    line-height:1.7;
+}
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+/* 背景光效 */
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.7rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(120deg, #ffffff, #9aa9ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-decoration: none;
-        }
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-2;
+    background:
+    radial-gradient(circle at 20% 30%,rgba(88,130,255,.18),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(0,255,200,.08),transparent 30%),
+    #000;
+}
 
-        .logo span {
-            font-weight: 400;
-            font-size: 0.9rem;
-            background: none;
-            -webkit-background-clip: unset;
-            color: #a0aec0;
-        }
+/* 星空背景 */
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    radial-gradient(2px 2px at 20px 30px,#fff,transparent),
+    radial-gradient(2px 2px at 40px 70px,#aaa,transparent),
+    radial-gradient(1px 1px at 130px 40px,#fff,transparent),
+    radial-gradient(1px 1px at 230px 190px,#ddd,transparent);
+    background-size:250px 250px;
+    opacity:.15;
+    z-index:-1;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #e2e8f0;
-            transition: 0.2s;
-        }
+/* 导航栏 */
 
-        .nav-links a:hover {
-            color: #6e8eff;
-        }
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:18px 40px;
+    z-index:999;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.45);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+.nav-container{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        section {
-            scroll-margin-top: 90px;
-            margin-bottom: 6rem;
-        }
+.logo{
+    font-size:1.6rem;
+    font-weight:700;
+    text-decoration:none;
+    color:#fff;
+    letter-spacing:-1px;
+}
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
+.logo span{
+    color:#8aa4ff;
+    font-size:.9rem;
+    margin-left:4px;
+}
 
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+.nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+}
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(110, 142, 255, 0.2);
-            backdrop-filter: blur(8px);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: #a9c0ff;
-            border: 0.5px solid rgba(110, 142, 255, 0.4);
-            margin-bottom: 1.5rem;
-        }
+.nav-links a{
+    color:#ddd;
+    text-decoration:none;
+    transition:.3s;
+}
 
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #FFFFFF 0%, #C0D0FF 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
+.nav-links a:hover{
+    color:#8aa4ff;
+}
 
-        .hero .hero-sub {
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: #bbb5d9;
-            margin-bottom: 1.5rem;
-        }
+/* hero */
 
-        .hero-desc {
-            font-size: 1.1rem;
-            color: #b9c3db;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
 
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0.8rem 2rem;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(12px);
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
+.hero-content{
+    max-width:900px;
+    padding:20px;
+}
 
-        .btn-ghost:hover {
-            background: rgba(110, 142, 255, 0.2);
-            border-color: #6e8eff;
-            transform: scale(1.02);
-        }
+.hero-badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.1);
+    color:#a8bbff;
+    margin-bottom:24px;
+    backdrop-filter:blur(10px);
+}
 
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #ffffff, #bac8ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+.hero h1{
+    font-size:6rem;
+    font-weight:800;
+    letter-spacing:-4px;
+    background:linear-gradient(135deg,#fff,#9ab0ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-        .bio-card {
-            background: rgba(20, 20, 30, 0.6);
-            backdrop-filter: blur(16px);
-            border-radius: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 2rem 2rem;
-            transition: all 0.4s;
-            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.4);
-        }
+.hero-sub{
+    margin-top:10px;
+    font-size:1.5rem;
+    color:#bfc8ff;
+}
 
-        .lang-switch {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+.hero-desc{
+    margin-top:20px;
+    color:#a7b1d3;
+    font-size:1.05rem;
+}
 
-        .lang-btn {
-            background: transparent;
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #a0aec0;
-            cursor: pointer;
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            transition: all 0.2s;
-        }
+.btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:35px;
+    padding:14px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.35s;
+}
 
-        .lang-btn.active {
-            background: #6e8eff;
-            color: white;
-            box-shadow: 0 0 8px rgba(110,142,255,0.6);
-        }
+.btn-ghost:hover{
+    transform:translateY(-3px);
+    background:rgba(88,130,255,.18);
+}
 
-        .bio-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #eef2ff;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+/* section */
 
-        .bio-text p {
-            margin-bottom: 1rem;
-        }
+section{
+    padding:100px 20px;
+}
 
-        .zh-content,
-        .en-content {
-            transition: opacity 0.25s ease;
-        }
+.container{
+    max-width:1300px;
+    margin:auto;
+}
 
-        .hidden-lang {
-            display: none;
-        }
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+    font-weight:700;
+    letter-spacing:-2px;
+    background:linear-gradient(135deg,#fff,#9cb4ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
-        }
+/* 关于 */
 
-        .photo-card {
-            background: rgba(15, 15, 22, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 2rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            cursor: pointer;
-        }
+.bio-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:40px;
+    padding:50px;
+    backdrop-filter:blur(20px);
+}
 
-        .photo-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(110, 142, 255, 0.4);
-            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.6);
-        }
+.lang-switch{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-bottom:30px;
+}
 
-        .photo-img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
+.lang-btn{
+    border:none;
+    background:rgba(255,255,255,.06);
+    color:#ccc;
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.3s;
+}
 
-        .photo-card:hover .photo-img {
-            transform: scale(1.03);
-        }
+.lang-btn.active{
+    background:#6e8eff;
+    color:white;
+}
 
-        .photo-info {
-            padding: 1.2rem 1.5rem;
-        }
+.bio-text{
+    color:#d6dcff;
+    font-size:1.08rem;
+}
 
-        .photo-title {
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
+.bio-text p{
+    margin-bottom:22px;
+}
 
-        .photo-location {
-            font-size: 0.8rem;
-            color: #98a2c7;
-        }
+.hidden-lang{
+    display:none;
+}
 
-        .auspicious-area {
-            background: radial-gradient(ellipse at 50% 50%, rgba(30, 30, 55, 0.5), rgba(0,0,0,0.2));
-            border-radius: 3rem;
-            padding: 2rem 1.5rem;
-            margin: 3rem 0;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(110, 142, 255, 0.2);
-        }
+/* 摄影 */
 
-        .motto-container {
-            text-align: center;
-        }
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:28px;
+}
 
-        .motto-title {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 400;
-            color: #9aaaff;
-            margin-bottom: 1rem;
-        }
+.photo-card{
+    overflow:hidden;
+    border-radius:30px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+    transition:.45s;
+    cursor:pointer;
+    backdrop-filter:blur(12px);
+}
 
-        .motto-rotator {
-            font-size: 1.6rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #f0f3ff, #b9cbff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            min-height: 4rem;
-            display: inline-block;
-            transition: opacity 0.5s;
-        }
+.photo-card:hover{
+    transform:translateY(-12px) scale(1.02);
+    box-shadow:0 30px 50px rgba(0,0,0,.5);
+    border-color:rgba(120,140,255,.4);
+}
 
-        .motto-chip-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
+.photo-img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:1s;
+}
 
-        .chip {
-            background: rgba(110, 142, 255, 0.12);
-            border-radius: 40px;
-            padding: 0.4rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-            border: 0.5px solid rgba(110, 142, 255, 0.3);
-            color: #cddbff;
-        }
+.photo-card:hover .photo-img{
+    transform:scale(1.06);
+}
 
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            text-align: center;
-            color: #7f8cae;
-            font-size: 0.85rem;
-            margin-top: 4rem;
-        }
+.photo-info{
+    padding:22px;
+}
 
-        .footer-domain {
-            font-family: monospace;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.03);
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
-        }
+.photo-title{
+    font-size:1.2rem;
+    font-weight:600;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
+.photo-location{
+    margin-top:8px;
+    color:#9fa8cb;
+    font-size:.9rem;
+}
 
-        .modal-content {
-            max-width: 85vw;
-            max-height: 85vh;
-            border-radius: 2rem;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        }
+/* 箴言 */
 
-        .modal-content img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+.auspicious-area{
+    padding:60px 30px;
+    border-radius:40px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    text-align:center;
+}
 
-        .modal-close {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            background: rgba(0,0,0,0.5);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
+.motto-title{
+    color:#94a9ff;
+    letter-spacing:4px;
+    margin-bottom:30px;
+}
 
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.8s ease;
-        }
+.motto-rotator{
+    font-size:2rem;
+    font-weight:700;
+    min-height:80px;
+    background:linear-gradient(135deg,#fff,#b6c6ff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
 
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.motto-chip-group{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin-top:30px;
+}
 
-        @media (max-width: 780px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
+.chip{
+    padding:10px 18px;
+    border-radius:999px;
+    background:rgba(110,142,255,.12);
+    border:1px solid rgba(110,142,255,.2);
+    color:#cfd8ff;
+    font-size:.85rem;
+}
 
-            .hero .hero-sub {
-                font-size: 1.2rem;
-            }
+/* footer */
 
-            .section-title {
-                font-size: 2rem;
-            }
+footer{
+    text-align:center;
+    padding:50px 20px;
+    border-top:1px solid rgba(255,255,255,.06);
+    color:#8892ba;
+}
 
-            .container {
-                padding: 0 1.2rem;
-            }
+.footer-domain{
+    margin-top:12px;
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.04);
+}
 
-            .nav-links {
-                gap: 1rem;
-            }
+/* modal */
 
-            .motto-rotator {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.94);
+    z-index:2000;
+    justify-content:center;
+    align-items:center;
+    backdrop-filter:blur(20px);
+}
+
+.modal-content img{
+    max-width:85vw;
+    max-height:85vh;
+    border-radius:24px;
+}
+
+.modal-close{
+    position:absolute;
+    top:30px;
+    right:40px;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+/* 动画 */
+
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.fade-up.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* 响应式 */
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:3.2rem;
+}
+
+.hero-sub{
+    font-size:1.1rem;
+}
+
+.section-title{
+    font-size:2rem;
+}
+
+.nav-links{
+    gap:16px;
+}
+
+.bio-card{
+    padding:30px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="glow-bg"></div>
-
 <nav class="navbar">
-    <div class="nav-container">
-        <a href="#" class="logo">归鹤书<span> · GUIHESHU</span></a>
+<div class="nav-container">
 
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#about">关于</a></li>
-            <li><a href="#photography">摄影作品</a></li>
-            <li><a href="#blessings">灵韵集</a></li>
-        </ul>
-    </div>
+<a href="#" class="logo">
+归鹤书<span> · GUIHESHU</span>
+</a>
+
+<ul class="nav-links">
+<li><a href="#home">首页</a></li>
+<li><a href="#about">关于</a></li>
+<li><a href="#photography">摄影</a></li>
+<li><a href="#blessings">灵韵</a></li>
+</ul>
+
+</div>
 </nav>
 
-<main>
+<!-- HERO -->
 
-    <!-- Hero -->
-    <section id="home" class="hero">
-        <div class="hero-content fade-up visible">
-            <div class="hero-badge">
-                <i class="fas fa-camera-retro"></i>
-                视觉叙事者 · 联结万象
-            </div>
+<section class="hero" id="home">
 
-            <h1>归鹤书</h1>
+<div class="hero-content fade-up visible">
 
-            <div class="hero-sub">
-                光与代码的织梦人
-            </div>
+<div class="hero-badge">
+<i class="fas fa-camera-retro"></i>
+视觉叙事者 · 联结万象
+</div>
 
-            <p class="hero-desc">
-                理性思辨 · 感性共振 · 跨领域叙事
-            </p>
+<h1>归鹤书</h1>
 
-            <a href="#about" class="btn-ghost">
-                <i class="fas fa-arrow-down"></i>
-                探索我的世界
-            </a>
-        </div>
-    </section>
+<div class="hero-sub">
+光与代码的织梦人
+</div>
 
-    <!-- 关于 -->
-    <section id="about">
-        <div class="container">
+<p class="hero-desc">
+理性思辨 · 感性共振 · 跨领域叙事
+</p>
 
-            <h2 class="section-title fade-up">
-                关于 · 归鹤书
-            </h2>
+<a href="#about" class="btn-ghost">
+<i class="fas fa-arrow-down"></i>
+探索我的世界
+</a>
 
-            <div class="bio-card fade-up">
+</div>
 
-                <div class="lang-switch">
-                    <button class="lang-btn active" id="btn-zh">中文</button>
-                    <button class="lang-btn" id="btn-en">English</button>
-                </div>
+</section>
 
-                <!-- 中文内容 -->
-                <div id="zh-bio" class="bio-text zh-content">
+<!-- 关于 -->
 
-                    <p>
-                        Hello! 我是归鹤书。很荣幸能在此，以文字为媒介，勾勒一个立体而真实的自我。若用一个词概括我的核心特质，那或许是 “联结”。我深信，世界的魅力在于其复杂而精妙的关联。因此，我热衷于探寻不同学科、不同领域间的隐秘纽带。在物理实验中验证的数学之美，在历史脉络里窥见的人文哲思，在代码逻辑中感受的秩序与创造——这些跨越藩篱的体验，构成了我认知世界的独特棱镜。它让我不满足于单一答案，而习惯于用多元视角审视问题。
-                    </p>
+<section id="about">
 
-                    <p>
-                        理性与感性的平衡，是我追求的另一重境界。在逻辑推导与数据模型中，我享受思辨的严谨与清晰；在文学阅读与艺术赏析里，我亦珍视情感的共鸣与想象的驰骋。我认为，真正的“高级”并非摒弃感性，而是让理性为感性导航，让感性为理性赋魅。这使我既能冷静分析一道数学压轴题，也能为一部电影中的光影与配乐深深动容。
-                    </p>
+<div class="container">
 
-                </div>
+<h2 class="section-title fade-up">
+关于 · 归鹤书
+</h2>
 
-                <!-- 英文内容 -->
-                <div id="en-bio" class="bio-text en-content hidden-lang">
+<div class="bio-card fade-up">
 
-                    <p>
-                        Hello! I am Gui Heshu. It’s a pleasure to outline a multi-dimensional and authentic self through words. If one word could capture my core essence, it would be “Connection”. I strongly believe the beauty of our world lies within its intricate and subtle relationships. Hence, I am passionate about exploring hidden bonds across different disciplines — the mathematical elegance validated in physics experiments, the philosophical insights glimpsed through historical threads, the sense of order and creativity within code logic.
-                    </p>
+<div class="lang-switch">
+<button class="lang-btn active" id="btn-zh">中文</button>
+<button class="lang-btn" id="btn-en">English</button>
+</div>
 
-                    <p>
-                        The harmony between rationality and emotion is another realm I pursue. Within logical deduction and data models, I enjoy rigorous, clear thinking; within literature and art appreciation, I treasure emotional resonance and imaginative freedom. I believe true sophistication never abandons emotion but allows rationality to navigate while sensibility enchants.
-                    </p>
+<div id="zh-bio" class="bio-text">
+<p>
+Hello! 我是归鹤书。热爱科技、艺术与摄影，
+追求理性与感性的平衡。
+</p>
 
-                </div>
+<p>
+摄影于我，是捕捉瞬间的永恒；
+科技于我，是构建联结的桥梁。
+</p>
+</div>
 
-            </div>
-        </div>
-    </section>
+<div id="en-bio" class="bio-text hidden-lang">
+<p>
+Hello! I am Gui Heshu.
+A creator passionate about technology,
+art and visual storytelling.
+</p>
 
-</main>
+<p>
+Photography captures eternity.
+Technology builds connection.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- 摄影 -->
+
+<section id="photography">
+
+<div class="container">
+
+<h2 class="section-title fade-up">
+光影诗集 · 摄影作品
+</h2>
+
+<div class="gallery-grid">
+
+<div class="photo-card fade-up"
+data-img="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg">
+
+<img class="photo-img"
+src="https://images.pexels.com/photos/2356059/pexels-photo-2356059.jpeg?auto=compress&cs=tinysrgb&w=600"
+alt="">
+
+<div class="photo-info">
+<div class="photo-title">暮色之镜</div>
+<div class="photo-location">
+<i class="fas fa-location-dot"></i>
+川西 · 冷嘎措
+</div>
+</div>
+
+</div>
+
+<div class="photo-card fade-up"
+data-img="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg">
+
+<img class="photo-img"
+src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=600"
+alt="">
+
+<div class="photo-info">
+<div class="photo-title">城市脉搏</div>
+<div class="photo-location">
+<i class="fas fa-location-dot"></i>
+上海 · 陆家嘴
+</div>
+</div>
+
+</div>
+
+<div class="photo-card fade-up"
+data-img="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg">
+
+<img class="photo-img"
+src="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=600"
+alt="">
+
+<div class="photo-info">
+<div class="photo-title">永恒之蓝</div>
+<div class="photo-location">
+<i class="fas fa-location-dot"></i>
+威海 · 金石湾
+</div>
+</div>
+
+</div>
+
+</div>
+
+<p class="bio-text"
+style="text-align:center;margin-top:2rem;font-size:.85rem;">
+<i class="fas fa-expand-alt"></i>
+点击任意摄影作品即可沉浸欣赏大图
+</p>
+
+<!-- 新增说明 -->
+
+<p style="
+text-align:center;
+margin-top:1rem;
+color:#8b93b7;
+font-size:.82rem;
+line-height:1.8;
+opacity:.8;
+letter-spacing:.03em;
+">
+由于作者制作网页的技术尚不熟练，
+所以照片取材于网络，
+图片信息与地理信息有出入。
+</p>
+
+</div>
+
+</section>
+
+<!-- 箴言 -->
+
+<section id="blessings">
+
+<div class="container">
+
+<div class="auspicious-area fade-up">
+
+<div class="motto-title">
+<i class="fas fa-feather-alt"></i>
+灵韵流转 · 能量箴言
+</div>
+
+<div class="motto-rotator" id="rotatingMotto">
+✨ 诸事顺利 ✨
+</div>
+
+<div class="motto-chip-group">
+
+<span class="chip">诸事顺利</span>
+<span class="chip">万事顺遂</span>
+<span class="chip">平安吉祥</span>
+<span class="chip">时来运转</span>
+<span class="chip">顺风顺水</span>
+<span class="chip">发财被爱</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2025 归鹤书 · 联结科技与诗意 | 版权所有
+</p>
+
+<p class="footer-domain">
+<i class="fas fa-globe"></i>
+栖息地：www.guiheshu.com
+</p>
+
+<p style="margin-top:10px;">
+<i class="fas fa-camera"></i>
+光为笔 · 心为镜
+</p>
+
+</footer>
+
+<!-- 模态框 -->
+
+<div id="imageModal" class="modal">
+
+<div class="modal-close">
+&times;
+</div>
+
+<div class="modal-content">
+<img id="modalImg" src="">
+</div>
+
+</div>
 
 <script>
 
-    const zhDiv = document.getElementById('zh-bio');
-    const enDiv = document.getElementById('en-bio');
+/* 中英文切换 */
 
-    const btnZh = document.getElementById('btn-zh');
-    const btnEn = document.getElementById('btn-en');
+const zhDiv=document.getElementById('zh-bio');
+const enDiv=document.getElementById('en-bio');
 
-    function setLang(lang) {
+const btnZh=document.getElementById('btn-zh');
+const btnEn=document.getElementById('btn-en');
 
-        if (lang === 'zh') {
+btnZh.onclick=()=>{
+zhDiv.classList.remove('hidden-lang');
+enDiv.classList.add('hidden-lang');
+btnZh.classList.add('active');
+btnEn.classList.remove('active');
+}
 
-            zhDiv.classList.remove('hidden-lang');
-            enDiv.classList.add('hidden-lang');
+btnEn.onclick=()=>{
+enDiv.classList.remove('hidden-lang');
+zhDiv.classList.add('hidden-lang');
+btnEn.classList.add('active');
+btnZh.classList.remove('active');
+}
 
-            btnZh.classList.add('active');
-            btnEn.classList.remove('active');
+/* 箴言轮播 */
 
-        } else {
+const mottos=[
+"✨ 诸事顺利 ✨",
+"🌈 万事顺遂 🌈",
+"💰 发财被爱 💰",
+"🕊️ 平安吉祥 🕊️",
+"🌊 顺风顺水 🌊"
+];
 
-            zhDiv.classList.add('hidden-lang');
-            enDiv.classList.remove('hidden-lang');
+let index=0;
 
-            btnEn.classList.add('active');
-            btnZh.classList.remove('active');
-        }
-    }
+const mottoEl=document.getElementById('rotatingMotto');
 
-    btnZh.addEventListener('click', () => setLang('zh'));
-    btnEn.addEventListener('click', () => setLang('en'));
+setInterval(()=>{
+
+index=(index+1)%mottos.length;
+
+mottoEl.style.opacity=0;
+
+setTimeout(()=>{
+mottoEl.innerText=mottos[index];
+mottoEl.style.opacity=1;
+},300);
+
+},2800);
+
+/* 滚动动画 */
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+}
+
+});
+
+},{threshold:.15});
+
+document.querySelectorAll('.fade-up')
+.forEach(el=>observer.observe(el));
+
+/* 图片模态框 */
+
+const modal=document.getElementById('imageModal');
+const modalImg=document.getElementById('modalImg');
+
+document.querySelectorAll('.photo-card')
+.forEach(card=>{
+
+card.onclick=()=>{
+
+modal.style.display='flex';
+modalImg.src=card.dataset.img;
+
+}
+
+});
+
+modal.onclick=()=>{
+modal.style.display='none';
+}
 
 </script>
 

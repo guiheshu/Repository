@@ -1,10 +1,34 @@
-export default function TechProfileSite() { const games = [ "原神 / Genshin", "光遇 / Sky", "异环 / Neverness to Everness", "王者荣耀 / Honor of Kings", "逆水寒 / Justice", "我的世界 / Minecraft", "和平精英 / Game for Peace", "无畏契约 / Valorant", ];
+import { useEffect, useMemo, useState } from "react";
+
+export default function TechProfileSite() { const [darkMode, setDarkMode] = useState(true); const [currentBlessing, setCurrentBlessing] = useState(0); const [lang, setLang] = useState("cn"); const [time, setTime] = useState(new Date());
+
+useEffect(() => { const timer = setInterval(() => { setTime(new Date()); setCurrentBlessing((prev) => (prev + 1) % blessings.length); }, 4000);
+
+return () => clearInterval(timer);
+
+}, []);
+
+const weather = "Paris · 23°C · Clear Sky";
+
+const games = [ "原神 / Genshin", "光遇 / Sky", "异环 / Neverness to Everness", "王者荣耀 / Honor of Kings", "逆水寒 / Justice", "我的世界 / Minecraft", "和平精英 / Game for Peace", "无畏契约 / Valorant", ];
 
 const blessings = [ "愿你始终拥有热爱世界的勇气。", "May your future shine brighter than the stars.", "愿理性与浪漫永远并存于你的宇宙。", "Keep exploring the unknown with curiosity.", "愿你被世界温柔以待。", "Connection makes the universe meaningful.", ];
 
-return ( <div className="bg-black text-white min-h-screen overflow-hidden font-sans"> <style>{` html { scroll-behavior: smooth; }
+const skills = [ "Creative Coding", "UI / UX Design", "Physics & Mathematics", "AI Interaction", "Motion Design", "Photography", ];
 
-body {
+const projects = [ { title: "Future Personal OS", desc: "一个融合科技、艺术与交互设计的未来个人主页系统。", }, { title: "AI Motion Interface", desc: "探索 AI 与动态视觉结合的新型交互体验。", }, { title: "Cinematic Portfolio", desc: "电影级视觉叙事与 Apple 风格高级动画实验。", }, ];
+
+return ( <div className={${darkMode ? "bg-black text-white" : "bg-white text-black"} min-h-screen overflow-hidden font-sans transition-all duration-700}> <div className="fixed inset-0 pointer-events-none z-50"> <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,153,255,0.08),transparent_55%)]" /> </div>
+
+<audio autoPlay loop controls className="fixed bottom-5 right-5 z-50 opacity-70">
+    <source src="/music/bg.mp3" type="audio/mpeg" />
+  </audio>
+  <style>{`
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       background: #000;
     }
 
@@ -91,10 +115,39 @@ body {
     }
   `}</style>
 
+  <div className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/20 border-b border-white/10 px-6 py-4 flex justify-between items-center">
+    <div className="font-bold tracking-[0.3em] text-cyan-300">
+      GUIHESHU.OS
+    </div>
+
+    <div className="flex gap-3 items-center text-sm">
+      <button
+        onClick={() => setLang(lang === "cn" ? "en" : "cn")}
+        className="px-4 py-2 rounded-full glass"
+      >
+        {lang === "cn" ? "EN" : "中文"}
+      </button>
+
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="px-4 py-2 rounded-full glass"
+      >
+        {darkMode ? "Light" : "Dark"}
+      </button>
+    </div>
+  </div>
+
   <section className="hero-bg relative min-h-screen flex flex-col justify-center items-center px-6 text-center overflow-hidden">
     <div className="absolute inset-0 opacity-20">
       <div className="absolute w-[500px] h-[500px] bg-cyan-400 rounded-full blur-3xl top-[-100px] left-[-100px]" />
       <div className="absolute w-[400px] h-[400px] bg-purple-500 rounded-full blur-3xl bottom-[-100px] right-[-100px]" />
+    </div>
+
+    <div className="absolute inset-0 overflow-hidden opacity-40">
+      <div className="absolute w-1 h-1 bg-white rounded-full top-[10%] left-[20%] animate-pulse" />
+      <div className="absolute w-2 h-2 bg-cyan-300 rounded-full top-[30%] left-[70%] animate-ping" />
+      <div className="absolute w-1 h-1 bg-purple-300 rounded-full top-[60%] left-[40%] animate-pulse" />
+      <div className="absolute w-2 h-2 bg-white rounded-full top-[80%] left-[80%] animate-pulse" />
     </div>
 
     <div className="relative z-10 fade-up">
@@ -110,6 +163,12 @@ body {
         科技感 · 理性与感性的平衡 · 探索世界的联结
       </p>
 
+      <div className="mt-10 glass rounded-full px-8 py-4 text-sm text-gray-300 inline-flex gap-8 flex-wrap justify-center">
+        <span>{time.toLocaleTimeString()}</span>
+        <span>{weather}</span>
+        <span>Apple-level Motion Experience</span>
+      </div>
+
       <div className="mt-12 flex flex-wrap justify-center gap-4">
         <a
           href="#intro"
@@ -124,6 +183,26 @@ body {
         >
           Favorite Games
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section className="relative py-32 overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_60%)]" />
+
+    <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="glass rounded-[50px] p-12 text-center">
+        <p className="uppercase tracking-[0.5em] text-cyan-300 text-sm mb-5">
+          About Me
+        </p>
+
+        <h2 className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+          Future Explorer
+        </h2>
+
+        <p className="text-lg md:text-2xl text-gray-300 leading-10 max-w-4xl mx-auto">
+          在科技与诗意之间，寻找属于未来的人类表达方式。
+        </p>
       </div>
     </div>
   </section>
@@ -176,6 +255,95 @@ body {
           <br /><br />
           This enables me to calmly analyze a challenging mathematical problem while also being deeply moved by the cinematography and soundtrack of a film.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section className="py-32 px-6 bg-gradient-to-b from-black to-[#07111f]">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-20">
+        <p className="uppercase tracking-[0.4em] text-cyan-300 text-sm mb-4">
+          Skills
+        </p>
+
+        <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+          技能矩阵
+        </h2>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {skills.map((skill) => (
+          <div
+            key={skill}
+            className="glass rounded-[35px] p-10 hover:scale-105 transition duration-500"
+          >
+            <div className="text-2xl font-bold text-cyan-300 mb-4">
+              {skill}
+            </div>
+
+            <p className="text-gray-300 leading-8">
+              Futuristic interaction experience with cinematic visual aesthetics.
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section className="py-32 px-6 bg-black">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-20">
+        <p className="uppercase tracking-[0.4em] text-purple-300 text-sm mb-4">
+          Projects
+        </p>
+
+        <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
+          项目经历
+        </h2>
+      </div>
+
+      <div className="space-y-8">
+        {projects.map((project) => (
+          <div
+            key={project.title}
+            className="glass rounded-[40px] p-10 hover:translate-x-3 transition duration-500"
+          >
+            <h3 className="text-3xl font-bold text-cyan-300 mb-5">
+              {project.title}
+            </h3>
+
+            <p className="text-gray-300 text-lg leading-9">
+              {project.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section
+    className="relative py-32 overflow-hidden bg-gradient-to-b from-[#07111f] to-black"
+  >
+    <div className="max-w-6xl mx-auto px-6 text-center">
+      <p className="uppercase tracking-[0.4em] text-cyan-300 text-sm mb-4">
+        Photography
+      </p>
+
+      <h2 className="text-5xl md:text-7xl font-black mb-20 bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+        光影档案
+      </h2>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {[1,2,3].map((i) => (
+          <div
+            key={i}
+            className="glass aspect-[4/5] rounded-[40px] overflow-hidden group cursor-pointer"
+          >
+            <div className="w-full h-full bg-gradient-to-br from-cyan-400/20 to-purple-500/20 group-hover:scale-110 transition duration-700 flex items-center justify-center text-2xl text-white/70">
+              Cinematic Shot {i}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
